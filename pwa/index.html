@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Stripe</title>
+  
+  <!-- PWA & iOS Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Stripe">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#635bff">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", sans-serif;
+      background: radial-gradient(circle at 50% 20%, #131b2e 0%, #060911 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: max(env(safe-area-inset-top), 20px);
+      padding-bottom: max(env(safe-area-inset-bottom), 30px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      touch-action: manipulation;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Top Nav */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 4px;
+    }
+
+    .nav-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: #fff;
+    }
+
+    .icon-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-size: 18px;
+      pointer-events: auto;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* Total Manifested Section */
+    .manifest-header {
+      text-align: center;
+      padding: 10px 0 6px 0;
+    }
+
+    .manifest-header .subtext {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .manifest-header .amount {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #fae053 0%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(52, 211, 153, 0.35);
+    }
+
+    .manifest-header .today-badge {
+      font-size: 26px;
+      font-weight: 700;
+      color: #6ee7b7;
+      margin-top: 2px;
+    }
+
+    /* Instant Rain Button */
+    .rain-btn {
+      width: 100%;
+      padding: 18px 20px;
+      background: #111726;
+      border-radius: 18px;
+      border: 1.5px solid transparent;
+      background-image: linear-gradient(#111726, #111726), linear-gradient(135deg, #fae053, #34d399);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 10px 30px -5px rgba(52, 211, 153, 0.3);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .rain-btn:active {
+      transform: scale(0.97);
+    }
+
+    .rain-btn.active-pulse {
+      animation: pulseGlow 1.5s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { box-shadow: 0 0 15px rgba(52, 211, 153, 0.3); }
+      to { box-shadow: 0 0 35px rgba(250, 224, 83, 0.6); }
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: rgba(22, 27, 34, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .row-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 8px 0;
+    }
+
+    .row-info .label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .row-info .value {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 4px 0;
+    }
+
+    /* Abundance Flow */
+    .flow-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .flow-section-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .preview-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: #818cf8;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 12px;
+      background: rgba(129, 140, 248, 0.1);
+      pointer-events: auto;
+    }
+
+    .tx-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tx-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(26, 32, 44, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+
+    .tx-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .tx-icon.stripe { background: #635bff; }
+    .tx-icon.cashapp { background: #00d632; }
+    .tx-icon.shopify { background: #95bf47; }
+    .tx-icon.wire { background: #46505f; }
+    .tx-icon.paypal { background: #0070ba; }
+
+    .tx-details {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .tx-platform {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .tx-sender {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tx-amount-col {
+      text-align: right;
+    }
+
+    .tx-amount {
+      font-size: 16px;
+      font-weight: 700;
+      color: #34d399;
+    }
+
+    .tx-time {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+      margin-top: 2px;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      z-index: 999;
+      display: none;
+      align-items: flex-end;
+    }
+
+    .modal-overlay.open {
+      display: flex !important;
+    }
+
+    .modal-sheet {
+      width: 100%;
+      background: #0d121c;
+      border-radius: 28px 28px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 24px 20px max(env(safe-area-inset-bottom), 20px) 20px;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .done-btn {
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 8px 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Interactive Platform Toggle Cards */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .platform-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .platform-card.active {
+      border-color: #34d399;
+      background: rgba(52, 211, 153, 0.12);
+    }
+
+    .platform-card .check-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .platform-card.active .check-circle {
+      background: #34d399;
+      border-color: #34d399;
+      color: #000;
+    }
+
+    /* Slider & Inputs */
+    .custom-slider {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      outline: none;
+      margin: 14px 0;
+    }
+
+    .custom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #34d399;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.6);
+    }
+
+    .chips-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      padding: 10px 0;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .chip.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    .select-dropdown {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 14px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      outline: none;
+      margin-top: 8px;
+    }
+
+    .select-dropdown option {
+      background: #111726;
+      color: #fff;
+    }
+
+    /* Lock Screen Simulator Overlay */
+    .lock-screen-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, #1e2a38 0%, #0f141c 100%);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      padding: max(env(safe-area-inset-top), 24px) 16px max(env(safe-area-inset-bottom), 20px) 16px;
+      overflow-y: auto;
+    }
+
+    .lock-screen-modal.open {
+      display: flex !important;
+    }
+
+    .lock-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .lock-icon {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .lock-time {
+      font-size: 78px;
+      font-weight: 200;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .lock-date {
+      font-size: 19px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 6px;
+    }
+
+    .notification-card {
+      background: rgba(40, 45, 55, 0.85);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 20px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      margin-bottom: 12px;
+    }
+
+    .notif-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .notif-badge.stripe { background: #635bff; }
+    .notif-badge.cashapp { background: #00d632; }
+    .notif-badge.shopify { background: #95bf47; }
+    .notif-badge.wire { background: #46505f; }
+    .notif-badge.paypal { background: #0070ba; }
+
+    .notif-content {
+      flex: 1;
+    }
+
+    .notif-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .notif-time {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 400;
+    }
+
+    .notif-body {
+      font-size: 13.5px;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <button class="icon-btn" id="lockScreenBtn" type="button">🔒</button>
+      <div class="nav-title">Abundance</div>
+      <button class="icon-btn" id="settingsBtn" type="button">⚙️</button>
+    </div>
+
+    <!-- Header Revenue Counter -->
+    <div class="manifest-header">
+      <div class="subtext">Total manifested revenue for</div>
+      <div class="amount" id="totalDisplay">+$14,290.00</div>
+      <div class="today-badge">Today</div>
+    </div>
+
+    <!-- Instant Rain Trigger Button -->
+    <button class="rain-btn" id="rainButton" type="button">
+      <span id="boltIcon">⚡</span>
+      <span id="rainBtnText">⚡ Trigger Instant Rain ($999 - $5k)</span>
+    </button>
+
+    <!-- Schedule Card -->
+    <div class="glass-card">
+      <div class="card-title">
+        <span>Manifestation Schedule</span>
+        <span style="font-size:12px; color:#34d399; cursor:pointer;" onclick="openSettings()">Edit ⚙️</span>
+      </div>
+      <div class="row-info">
+        <span class="label">Interval Frequency:</span>
+        <span class="value" id="scheduleInterval">Every 45 mins</span>
+      </div>
+      <div class="divider"></div>
+      <div class="row-info">
+        <span class="label">Active Hours:</span>
+        <span class="value" id="scheduleHours">8:00 AM – 10:00 PM</span>
+      </div>
+      <div class="divider"></div>
+      <div class="row-info">
+        <span class="label">Manifest Tier:</span>
+        <span class="value" id="tierDisplay">$999 Tier</span>
+      </div>
+    </div>
+
+    <!-- Live Flow List -->
+    <div>
+      <div class="flow-section-header">
+        <h3>Recent Abundance Flow</h3>
+        <div class="preview-link" id="previewLinkBtn">Preview Lock Screen ➔</div>
+      </div>
+      <div class="tx-list" id="txListContainer">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Settings Modal (Full Customizer) -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h2>Customizer & Settings</h2>
+        <button class="done-btn" id="closeSettingsBtn" type="button">Done</button>
+      </div>
+
+      <!-- 1. Platform Theme Customizer -->
+      <div class="glass-card">
+        <div class="card-title">Select Platform Themes</div>
+        <p style="font-size:12px; color:rgba(255,255,255,0.6);">Choose which payment platforms to manifest:</p>
+        
+        <div class="platform-grid">
+          <div class="platform-card active" data-platform="stripe" onclick="togglePlatform('stripe')">
+            <div class="mini-icon" style="background:#635bff;">S</div>
+            <span style="font-size:14px; font-weight:600;">Stripe</span>
+            <div class="check-circle">✓</div>
+          </div>
+
+          <div class="platform-card active" data-platform="cashapp" onclick="togglePlatform('cashapp')">
+            <div class="mini-icon" style="background:#00d632;">$</div>
+            <span style="font-size:14px; font-weight:600;">Cash App</span>
+            <div class="check-circle">✓</div>
+          </div>
+
+          <div class="platform-card active" data-platform="shopify" onclick="togglePlatform('shopify')">
+            <div class="mini-icon" style="background:#95bf47;">🛍️</div>
+            <span style="font-size:14px; font-weight:600;">Shopify</span>
+            <div class="check-circle">✓</div>
+          </div>
+
+          <div class="platform-card active" data-platform="paypal" onclick="togglePlatform('paypal')">
+            <div class="mini-icon" style="background:#0070ba;">P</div>
+            <span style="font-size:14px; font-weight:600;">PayPal</span>
+            <div class="check-circle">✓</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Deposit Amounts Customizer -->
+      <div class="glass-card">
+        <div class="card-title">Deposit Amounts & Goal Tier</div>
+        <div style="text-align:center; font-size:32px; font-weight:800; color:#34d399; margin:4px 0;" id="amountSliderDisplay">$999</div>
+        
+        <!-- Continuous Slider starting from $25 -->
+        <input type="range" min="25" max="10000" step="25" value="999" class="custom-slider" id="depositSlider" oninput="updateSliderAmount(this.value)">
+        <div style="display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,0.5);">
+          <span>$25</span>
+          <span>$5,000</span>
+          <span>$10,000+</span>
+        </div>
+
+        <!-- Smaller Increments Row -->
+        <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:12px;">Micro & Daily Flow:</div>
+        <div class="chips-row">
+          <div class="chip" onclick="setPreset(25)">$25</div>
+          <div class="chip" onclick="setPreset(50)">$50</div>
+          <div class="chip" onclick="setPreset(100)">$100</div>
+          <div class="chip" onclick="setPreset(200)">$200</div>
+        </div>
+
+        <!-- Medium & High Ticket Rows -->
+        <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:10px;">Medium & High-Ticket:</div>
+        <div class="chips-row">
+          <div class="chip" onclick="setPreset(499)">$499</div>
+          <div class="chip active" id="chip999" onclick="setPreset(999)">$999</div>
+          <div class="chip" onclick="setPreset(2500)">$2.5k</div>
+          <div class="chip" onclick="setPreset(5000)">$5k</div>
+        </div>
+
+        <div class="chips-row" style="margin-top:6px;">
+          <div class="chip" onclick="setPreset(10000)">$10k</div>
+          <div class="chip" onclick="setPreset(25000)">$25k</div>
+          <div class="chip" onclick="setPreset(50000)">$50k</div>
+          <div class="chip" onclick="setPreset(100000)">$100k</div>
+        </div>
+      </div>
+
+      <!-- 3. Manifestation Schedule Customizer -->
+      <div class="glass-card">
+        <div class="card-title">Daily Flow & Accumulator Goal</div>
+        
+        <label style="font-size:13px; color:rgba(255,255,255,0.7);">Today's Manifestation Target (Total Accumulator):</label>
+        <select class="select-dropdown" id="dailyGoalDropdown" onchange="updateDailyGoal(this.value)">
+          <option value="5000" selected>$5,000 Target Today ($25–$200 deposits compounding)</option>
+          <option value="10000">$10,000 Target Today ($50–$499 deposits compounding)</option>
+          <option value="25000">$25,000 Target Today ($100–$999 deposits compounding)</option>
+          <option value="50000">$50,000 High-Ticket Target ($499–$2,500 deposits compounding)</option>
+        </select>
+
+        <div style="margin-top:14px;">
+          <label style="font-size:13px; color:rgba(255,255,255,0.7);">Flow Strategy Mode:</label>
+          <select class="select-dropdown" id="flowStrategyDropdown" onchange="updateStrategy(this.value)">
+            <option value="micro_compounding" selected>🌊 Micro-Stream Accumulator ($25, $50, $100, $200 compounding to goal)</option>
+            <option value="exact_tier">🎯 Fixed Tier (Uses exact amount selected above)</option>
+            <option value="random_burst">⚡ Power Surge (Random mix of small & medium deposits)</option>
+          </select>
+        </div>
+
+        <div style="margin-top:14px;">
+          <label style="font-size:13px; color:rgba(255,255,255,0.7);">Notification Interval Frequency:</label>
+          <select class="select-dropdown" id="intervalDropdown" onchange="updateInterval(this.value)">
+            <option value="15 mins">Every 15 minutes (High Flow)</option>
+            <option value="30 mins">Every 30 minutes</option>
+            <option value="45 mins" selected>Every 45 minutes (Balanced)</option>
+            <option value="1 hour">Every 1 hour</option>
+            <option value="2 hours">Every 2 hours</option>
+            <option value="Random Spread">Surprise me randomly throughout the day</option>
+          </select>
+        </div>
+
+        <div style="margin-top:14px;">
+          <label style="font-size:13px; color:rgba(255,255,255,0.7);">Active Waking Window:</label>
+          <select class="select-dropdown" id="hoursDropdown" onchange="updateHours(this.value)">
+            <option value="8:00 AM – 10:00 PM" selected>8:00 AM – 10:00 PM (Standard Day)</option>
+            <option value="6:00 AM – 11:00 PM">6:00 AM – 11:00 PM (Early Bird)</option>
+            <option value="9:00 AM – 5:00 PM">9:00 AM – 5:00 PM (Business Hours)</option>
+            <option value="24/7 Unlimited">24/7 (Non-stop Abundance)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 4. Notifications & Sound -->
+      <div class="glass-card">
+        <div class="card-title">Push Notifications & Sounds</div>
+        <button class="rain-btn" style="padding:14px; font-size:14px;" id="pushPermBtn" type="button">
+          🔔 Request System Notifications
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- In-App Realistic Lock Screen Simulator -->
+  <div class="lock-screen-modal" id="lockScreenModal">
+    <div class="lock-header">
+      <div class="lock-icon">🔒</div>
+      <div class="lock-time" id="lockClock">11:11</div>
+      <div class="lock-date" id="lockDate">Monday, May 18</div>
+    </div>
+
+    <div style="flex:1;" id="lockNotificationsList">
+      <!-- Injected via JS -->
+    </div>
+
+    <div style="display:flex; justify-content:space-between; gap:12px; margin-top:20px;">
+      <button class="rain-btn" style="flex:1; padding:14px; font-size:14px;" id="lockSimRainBtn" type="button">
+        ⚡ Simulate Live Rain
+      </button>
+      <button class="rain-btn" style="width:auto; padding:14px 24px; font-size:14px; background:#222a38;" id="closeLockBtn" type="button">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Audio synthesizer
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function playPaymentSound() {
+      try {
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        const osc1 = audioCtx.createOscillator();
+        const gain1 = audioCtx.createGain();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(1318.51, now);
+        gain1.gain.setValueAtTime(0.3, now);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc1.connect(gain1);
+        gain1.connect(audioCtx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.5);
+
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'triangle';
+        osc2.frequency.setValueAtTime(1661.22, now + 0.08);
+        gain2.gain.setValueAtTime(0.35, now + 0.08);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+        osc2.connect(gain2);
+        gain2.connect(audioCtx.destination);
+        osc2.start(now + 0.08);
+        osc2.stop(now + 0.8);
+
+        if (navigator.vibrate) {
+          navigator.vibrate([80, 40, 120]);
+        }
+      } catch (e) {
+        console.log("Audio play error", e);
+      }
+    }
+
+    // App State
+    let totalRevenue = 14290.00;
+    let selectedAmount = 999.00;
+    let isRaining = false;
+    let enabledPlatforms = {
+      stripe: true,
+      cashapp: true,
+      shopify: true,
+      paypal: true
+    };
+
+    let transactions = [
+      { id: 1, platform: 'Stripe', class: 'stripe', icon: 'S', sender: 'Horizon Studios', amount: 1450.00, time: '2m ago' },
+      { id: 2, platform: 'Cash App', class: 'cashapp', icon: '$', sender: '$marcus_v (Creative Direction)', amount: 850.00, time: '14m ago' },
+      { id: 3, platform: 'Shopify', class: 'shopify', icon: '🛍️', sender: 'Order #2891 • Aura Luxury Goods', amount: 2499.00, time: '1h ago' },
+      { id: 4, platform: 'PayPal', class: 'paypal', icon: 'P', sender: 'Elysian Digital Media', amount: 999.00, time: '2h ago' }
+    ];
+
+    const senders = ['Horizon Studios', 'Aura Luxury Goods', 'Creative Apex', 'Starlight Media', 'Elysian Ventures', 'marcus_v', 'sarah_j', 'Vanguard Direct', 'Quantum Growth Labs', 'Apex Capital'];
+
+    let dailyGoal = 5000;
+    let flowStrategy = 'micro_compounding';
+    let scheduleIntervalStr = 'Every 15 mins';
+    let scheduleHoursStr = '8:00 AM – 10:00 PM';
+
+    function togglePlatform(name) {
+      enabledPlatforms[name] = !enabledPlatforms[name];
+      const card = document.querySelector(`[data-platform="${name}"]`);
+      if (card) {
+        card.classList.toggle('active', enabledPlatforms[name]);
+      }
+      try {
+        localStorage.setItem('abundance_platforms', JSON.stringify(enabledPlatforms));
+      } catch(e) {}
+    }
+
+    function loadSavedSettings() {
+      try {
+        const savedPlatforms = localStorage.getItem('abundance_platforms');
+        if (savedPlatforms) {
+          enabledPlatforms = JSON.parse(savedPlatforms);
+          Object.keys(enabledPlatforms).forEach(key => {
+            const card = document.querySelector(`[data-platform="${key}"]`);
+            if (card) card.classList.toggle('active', enabledPlatforms[key]);
+          });
+        }
+        const savedAmt = localStorage.getItem('abundance_amount');
+        if (savedAmt) {
+          selectedAmount = parseFloat(savedAmt);
+          document.getElementById('depositSlider').value = selectedAmount > 10000 ? 10000 : selectedAmount;
+          document.getElementById('amountSliderDisplay').innerText = `$${selectedAmount.toLocaleString()}`;
+        }
+
+        const savedInterval = localStorage.getItem('abundance_interval');
+        if (savedInterval) {
+          scheduleIntervalStr = savedInterval;
+          document.getElementById('intervalDropdown').value = savedInterval;
+        }
+
+        const savedHours = localStorage.getItem('abundance_hours');
+        if (savedHours) {
+          scheduleHoursStr = savedHours;
+          document.getElementById('hoursDropdown').value = savedHours;
+        }
+
+        const savedGoal = localStorage.getItem('abundance_goal');
+        if (savedGoal) {
+          dailyGoal = parseFloat(savedGoal);
+          document.getElementById('dailyGoalDropdown').value = savedGoal;
+        }
+
+        const savedStrategy = localStorage.getItem('abundance_strategy');
+        if (savedStrategy) {
+          flowStrategy = savedStrategy;
+          document.getElementById('flowStrategyDropdown').value = savedStrategy;
+        }
+
+        updateUIState();
+      } catch (e) {
+        console.log("Storage load error", e);
+      }
+    }
+
+    function updateUIState() {
+      // Sync Dashboard Cards
+      const intervalEl = document.getElementById('scheduleInterval');
+      if (intervalEl) intervalEl.innerText = scheduleIntervalStr;
+
+      const hoursEl = document.getElementById('scheduleHours');
+      if (hoursEl) hoursEl.innerText = scheduleHoursStr;
+
+      const tierEl = document.getElementById('tierDisplay');
+      if (tierEl) {
+        tierEl.innerText = `$${selectedAmount.toLocaleString()} Tier`;
+      }
+
+      const rainBtnText = document.getElementById('rainBtnText');
+      if (rainBtnText) {
+        rainBtnText.innerText = `⚡ Trigger Instant Rain ($${selectedAmount.toLocaleString()}+)`;
+      }
+
+      // Sync Chips
+      document.querySelectorAll('.chip').forEach(c => {
+        const amtStr = c.getAttribute('onclick')?.match(/\d+/)?.[0];
+        if (amtStr && parseFloat(amtStr) === selectedAmount) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+    }
+
+    function updateDailyGoal(val) {
+      dailyGoal = parseFloat(val);
+      localStorage.setItem('abundance_goal', val);
+      updateUIState();
+    }
+
+    function updateStrategy(val) {
+      flowStrategy = val;
+      localStorage.setItem('abundance_strategy', val);
+      updateUIState();
+    }
+
+    function updateSliderAmount(val) {
+      selectedAmount = parseFloat(val);
+      localStorage.setItem('abundance_amount', val);
+      document.getElementById('amountSliderDisplay').innerText = `$${selectedAmount.toLocaleString()}`;
+      updateUIState();
+    }
+
+    function setPreset(amt) {
+      selectedAmount = amt;
+      localStorage.setItem('abundance_amount', amt);
+      document.getElementById('depositSlider').value = amt > 10000 ? 10000 : amt;
+      document.getElementById('amountSliderDisplay').innerText = `$${amt.toLocaleString()}`;
+      updateUIState();
+    }
+
+    function updateInterval(val) {
+      scheduleIntervalStr = val;
+      localStorage.setItem('abundance_interval', val);
+      updateUIState();
+    }
+
+    function updateHours(val) {
+      scheduleHoursStr = val;
+      localStorage.setItem('abundance_hours', val);
+      updateUIState();
+    }
+
+    function renderFeed() {
+      const container = document.getElementById('txListContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      transactions.forEach(tx => {
+        const item = document.createElement('div');
+        item.className = 'tx-item';
+        item.innerHTML = `
+          <div class="tx-icon ${tx.class}">${tx.icon}</div>
+          <div class="tx-details">
+            <div class="tx-platform">${tx.platform}</div>
+            <div class="tx-sender">${tx.sender}</div>
+          </div>
+          <div class="tx-amount-col">
+            <div class="tx-amount">+$${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</div>
+            <div class="tx-time">${tx.time}</div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+
+      renderLockScreenNotifications();
+    }
+
+    function renderLockScreenNotifications() {
+      const lockList = document.getElementById('lockNotificationsList');
+      if (!lockList) return;
+      lockList.innerHTML = '';
+
+      transactions.slice(0, 4).forEach(tx => {
+        let bodyText = '';
+        if (tx.platform === 'Stripe') {
+          bodyText = `You received a payment of $${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })} from ${tx.sender}`;
+        } else if (tx.platform === 'Cash App') {
+          bodyText = `$${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })} sent from ${tx.sender}`;
+        } else if (tx.platform === 'Shopify') {
+          bodyText = `${tx.sender} • $${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        } else if (tx.platform === 'PayPal') {
+          bodyText = `${tx.sender} sent you $${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        } else {
+          bodyText = `Direct Deposit of $${tx.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })} has cleared.`;
+        }
+
+        const card = document.createElement('div');
+        card.className = 'notification-card';
+        card.innerHTML = `
+          <div class="notif-badge ${tx.class}">${tx.icon}</div>
+          <div class="notif-content">
+            <div class="notif-top">
+              <span>${tx.platform}</span>
+              <span class="notif-time">${tx.time}</span>
+            </div>
+            <div class="notif-body">${bodyText}</div>
+          </div>
+        `;
+        lockList.appendChild(card);
+      });
+    }
+
+    let continuousFlowActive = true;
+    let flowIntervalTimer = null;
+
+    function toggleContinuousFlow() {
+      continuousFlowActive = !continuousFlowActive;
+      const statusBadge = document.getElementById('flowToggleStatus');
+      const toggleBtn = document.getElementById('liveFlowBtn');
+      if (continuousFlowActive) {
+        if (statusBadge) statusBadge.innerText = "🟢 ACTIVE (Flowing)";
+        if (toggleBtn) toggleBtn.innerText = "⏸️ Pause Continuous Flow";
+        startFlowTimer();
+      } else {
+        if (statusBadge) statusBadge.innerText = "⏸️ PAUSED";
+        if (toggleBtn) toggleBtn.innerText = "▶️ Resume Continuous Flow";
+        if (flowIntervalTimer) clearInterval(flowIntervalTimer);
+      }
+    }
+
+    function spawnSingleDeposit(customAmt = null) {
+      let amt = customAmt;
+      if (!amt) {
+        const microAmounts = [25.00, 35.00, 50.00, 75.00, 100.00, 150.00, 200.00, 250.00];
+        amt = microAmounts[Math.floor(Math.random() * microAmounts.length)];
+      }
+
+      const availablePlatforms = [];
+      if (enabledPlatforms.stripe) availablePlatforms.push({ name: 'Stripe', class: 'stripe', icon: 'S' });
+      if (enabledPlatforms.cashapp) availablePlatforms.push({ name: 'Cash App', class: 'cashapp', icon: '$' });
+      if (enabledPlatforms.shopify) availablePlatforms.push({ name: 'Shopify', class: 'shopify', icon: '🛍️' });
+      if (enabledPlatforms.paypal) availablePlatforms.push({ name: 'PayPal', class: 'paypal', icon: 'P' });
+      if (availablePlatforms.length === 0) availablePlatforms.push({ name: 'Stripe', class: 'stripe', icon: 'S' });
+
+      const p = availablePlatforms[Math.floor(Math.random() * availablePlatforms.length)];
+      const sender = senders[Math.floor(Math.random() * senders.length)];
+
+      const newTx = {
+        id: Date.now(),
+        platform: p.name,
+        class: p.class,
+        icon: p.icon,
+        sender: sender,
+        amount: amt,
+        time: 'Just now'
+      };
+
+      transactions.unshift(newTx);
+      totalRevenue += amt;
+      const totalEl = document.getElementById('totalDisplay');
+      if (totalEl) totalEl.innerText = `+$${totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+
+      renderFeed();
+      playPaymentSound();
+
+      // Send system push notification directly via ServiceWorkerRegistration
+      const body = p.name === 'Stripe' 
+        ? `You received a payment of $${amt.toLocaleString('en-US', { minimumFractionDigits: 2 })} from ${sender}`
+        : `$${amt.toLocaleString('en-US', { minimumFractionDigits: 2 })} sent from $${sender.toLowerCase().replace(' ', '_')} 💸`;
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.ready.then(reg => {
+          reg.showNotification('Payment Received', {
+            body: body,
+            icon: 'icon-192.png',
+            badge: 'icon-192.png',
+            vibrate: [200, 100, 200, 100, 200],
+            tag: 'deposit-' + Date.now(),
+            renotify: true
+          });
+        }).catch(err => console.log('SW notification error:', err));
+      } else if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Payment Received', {
+          body: body,
+          icon: 'icon-192.png'
+        });
+      }
+    }
+
+    function startFlowTimer() {
+      if (flowIntervalTimer) clearInterval(flowIntervalTimer);
+      // Continuous background deposit flow: triggers a deposit every 30–60 seconds while open
+      flowIntervalTimer = setInterval(() => {
+        if (continuousFlowActive) {
+          spawnSingleDeposit();
+        }
+      }, 35000);
+    }
+
+    function triggerInstantRain() {
+      if (isRaining) return;
+      isRaining = true;
+
+      const rainBtn = document.getElementById('rainButton');
+      const rainBtnText = document.getElementById('rainBtnText');
+      if (rainBtn) rainBtn.classList.add('active-pulse');
+      if (rainBtnText) rainBtnText.innerText = "⚡ Manifesting Abundance...";
+
+      const microBurst = [25.00, 50.00, 100.00, 200.00, 150.00, 250.00, 500.00];
+
+      microBurst.forEach((amount, index) => {
+        setTimeout(() => {
+          spawnSingleDeposit(amount);
+
+          if (index === microBurst.length - 1) {
+            isRaining = false;
+            if (rainBtn) rainBtn.classList.remove('active-pulse');
+            if (rainBtnText) rainBtnText.innerText = `⚡ Trigger Instant Rain (Compounding Flow)`;
+          }
+        }, (index + 1) * 1800);
+      });
+    }
+
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      hours = hours < 10 ? '0' + hours : hours;
+      const clockEl = document.getElementById('lockClock');
+      if (clockEl) clockEl.innerText = `${hours}:${minutes}`;
+
+      const options = { weekday: 'long', month: 'long', day: 'numeric' };
+      const dateEl = document.getElementById('lockDate');
+      if (dateEl) dateEl.innerText = now.toLocaleDateString('en-US', options);
+    }
+
+    function openSettings() {
+      document.getElementById('settingsModal').classList.add('open');
+    }
+
+    function urlBase64ToUint8Array(base64String) {
+      const padding = '='.repeat((4 - base64String.length % 4) % 4);
+      const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+      const rawData = window.atob(base64);
+      const outputArray = new Uint8Array(rawData.length);
+      for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+      }
+      return outputArray;
+    }
+
+    async function subscribeUserToPush() {
+      if (!('serviceWorker' in navigator) || !('PushManager' in window)) return;
+      try {
+        const reg = await navigator.serviceWorker.ready;
+        let sub = await reg.pushManager.getSubscription();
+        if (!sub) {
+          const res = await fetch('/vapidPublicKey');
+          const data = await res.json();
+          const convertedVapidKey = urlBase64ToUint8Array(data.publicKey);
+          sub = await reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: convertedVapidKey
+          });
+        }
+        await fetch('/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(sub)
+        });
+        console.log('✅ iPhone registered with Background Push Server for 15-min scheduled alerts!');
+      } catch (err) {
+        console.log('Push subscription error:', err);
+      }
+    }
+
+    function syncScheduleWithServer(intervalStr) {
+      const mins = parseInt(intervalStr.match(/\d+/)?.[0]) || 15;
+      fetch('/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ interval: mins })
+      }).catch(e => console.log('Config sync error:', e));
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('settingsBtn').addEventListener('click', openSettings);
+      document.getElementById('closeSettingsBtn').addEventListener('click', () => {
+        document.getElementById('settingsModal').classList.remove('open');
+      });
+
+      document.getElementById('lockScreenBtn').addEventListener('click', () => {
+        updateClock();
+        document.getElementById('lockScreenModal').classList.add('open');
+      });
+
+      document.getElementById('previewLinkBtn').addEventListener('click', () => {
+        updateClock();
+        document.getElementById('lockScreenModal').classList.add('open');
+      });
+
+      document.getElementById('closeLockBtn').addEventListener('click', () => {
+        document.getElementById('lockScreenModal').classList.remove('open');
+      });
+
+      document.getElementById('rainButton').addEventListener('click', triggerInstantRain);
+      document.getElementById('lockSimRainBtn').addEventListener('click', triggerInstantRain);
+
+      document.getElementById('pushPermBtn').addEventListener('click', async () => {
+        if ('Notification' in window) {
+          try {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+              alert('🎉 Notifications Enabled! Your iPhone will now receive deposits every 15 minutes in the background.');
+              await subscribeUserToPush();
+            } else {
+              alert('Notification permission status: ' + permission);
+            }
+          } catch(e) {
+            alert('Error: ' + e.message);
+          }
+        }
+      });
+
+      loadSavedSettings();
+      renderFeed();
+      updateClock();
+      startFlowTimer();
+      setInterval(updateClock, 10000);
+
+      // Auto-subscribe if already granted
+      if (window.Notification && Notification.permission === 'granted') {
+        subscribeUserToPush();
+      }
+    });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error:', err));
+    }
+  </script>
+</body>
+</html>

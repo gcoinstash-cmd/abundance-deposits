@@ -1,0 +1,322 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9B001001 /* AbundanceDepositsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001001 /* AbundanceDepositsApp.swift */; };
+		9B001002 /* PaymentPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001002 /* PaymentPlatform.swift */; };
+		9B001003 /* DepositTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001003 /* DepositTransaction.swift */; };
+		9B001004 /* HapticSoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001004 /* HapticSoundManager.swift */; };
+		9B001005 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001005 /* NotificationManager.swift */; };
+		9B001006 /* DepositStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001006 /* DepositStore.swift */; };
+		9B001007 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001007 /* GlassCard.swift */; };
+		9B001008 /* TransactionRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001008 /* TransactionRowView.swift */; };
+		9B001009 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001009 /* DashboardView.swift */; };
+		9B001010 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001010 /* SettingsView.swift */; };
+		9B001011 /* LockScreenPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A001011 /* LockScreenPreviewView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9A000001 /* AbundanceDeposits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AbundanceDeposits.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A001001 /* AbundanceDepositsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbundanceDepositsApp.swift; sourceTree = "<group>"; };
+		9A001002 /* PaymentPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPlatform.swift; sourceTree = "<group>"; };
+		9A001003 /* DepositTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositTransaction.swift; sourceTree = "<group>"; };
+		9A001004 /* HapticSoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticSoundManager.swift; sourceTree = "<group>"; };
+		9A001005 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		9A001006 /* DepositStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositStore.swift; sourceTree = "<group>"; };
+		9A001007 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/GlassCard.swift; sourceTree = "<group>"; };
+		9A001008 /* TransactionRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard/TransactionRowView.swift; sourceTree = "<group>"; };
+		9A001009 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard/DashboardView.swift; sourceTree = "<group>"; };
+		9A001010 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings/SettingsView.swift; sourceTree = "<group>"; };
+		9A001011 /* LockScreenPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenPreview/LockScreenPreviewView.swift; sourceTree = "<group>"; };
+		9A001012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9D000001 = {
+			isa = PBXGroup;
+			children = (
+				9D000002 /* AbundanceDeposits */,
+				9D000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9D000002 /* AbundanceDeposits */ = {
+			isa = PBXGroup;
+			children = (
+				9D000004 /* App */,
+				9D000005 /* Models */,
+				9D000006 /* Services */,
+				9D000007 /* Store */,
+				9D000008 /* Views */,
+			);
+			path = AbundanceDeposits;
+			sourceTree = "<group>";
+		};
+		9D000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9A000001 /* AbundanceDeposits.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D000004 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9A001001 /* AbundanceDepositsApp.swift */,
+				9A001012 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9D000005 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9A001002 /* PaymentPlatform.swift */,
+				9A001003 /* DepositTransaction.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9D000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9A001004 /* HapticSoundManager.swift */,
+				9A001005 /* NotificationManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9D000007 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				9A001006 /* DepositStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		9D000008 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9A001007 /* GlassCard.swift */,
+				9A001008 /* TransactionRowView.swift */,
+				9A001009 /* DashboardView.swift */,
+				9A001010 /* SettingsView.swift */,
+				9A001011 /* LockScreenPreviewView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9E000001 /* AbundanceDeposits */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F000001 /* Build configuration list for PBXNativeTarget "AbundanceDeposits" */;
+			buildPhases = (
+				9B000000 /* Sources */,
+				9C000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AbundanceDeposits;
+			productName = AbundanceDeposits;
+			productReference = 9A000001 /* AbundanceDeposits.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		90000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					9E000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 9F000002 /* Build configuration list for PBXProject "AbundanceDeposits" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9D000001;
+			productRefGroup = 9D000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9E000001 /* AbundanceDeposits */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9B000000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B001001 /* AbundanceDepositsApp.swift in Sources */,
+				9B001002 /* PaymentPlatform.swift in Sources */,
+				9B001003 /* DepositTransaction.swift in Sources */,
+				9B001004 /* HapticSoundManager.swift in Sources */,
+				9B001005 /* NotificationManager.swift in Sources */,
+				9B001006 /* DepositStore.swift in Sources */,
+				9B001007 /* GlassCard.swift in Sources */,
+				9B001008 /* TransactionRowView.swift in Sources */,
+				9B001009 /* DashboardView.swift in Sources */,
+				9B001010 /* SettingsView.swift in Sources */,
+				9B001011 /* LockScreenPreviewView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9F000011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AbundanceDeposits/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zomaemedia.abundancedeposits;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1";
+			};
+			name = Debug;
+		};
+		9F000012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AbundanceDeposits/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zomaemedia.abundancedeposits;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1";
+			};
+			name = Release;
+		};
+		9F000021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9F000022 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9F000001 /* Build configuration list for PBXNativeTarget "AbundanceDeposits" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F000011 /* Debug */,
+				9F000012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F000002 /* Build configuration list for PBXProject "AbundanceDeposits" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F000021 /* Debug */,
+				9F000022 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 90000001 /* Project object */;
+}

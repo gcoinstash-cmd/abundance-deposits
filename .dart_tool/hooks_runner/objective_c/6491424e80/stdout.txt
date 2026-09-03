@@ -1,0 +1,56 @@
+Running `(cd /Users/gmane/.pub-cache/hosted/pub.dev/objective_c-9.5.0/; TMPDIR=/var/folders/qr/048mxggd5ps0729whzv03x6h0000gn/T/ PATH=/Applications/Xcode.app/Contents/SharedFrameworks/SwiftBuild.framework/Versions/A/PlugIns/SWBBuildService.bundle/Contents/PlugIns/SWBUniversalPlatformPlugin.bundle/Contents/Frameworks/SWBUniversalPlatform.framework/Resources:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/libexec:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/usr/local/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/local/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/local/bin:/Users/gmane/.gemini/antigravity/bin:/Users/gmane/Library/Application Support/Antigravity/bin:/Users/gmane/development/flutter/bin:/Users/gmane/.local/bin:/Library/Frameworks/Python.framework/Versions/3.14/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin HOME=/Users/gmane /Users/gmane/development/flutter/bin/cache/dart-sdk/bin/dart '--packages=/Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/package_config.json' '/Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/objective_c/6491424e80/hook.dill' '--config=/Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/objective_c/6491424e80/input.json' )`.
+INFO: 2026-08-09 03:04:26.373241: Using compiler /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang from BuildInput.cCompiler.cc.
+
+INFO: 2026-08-09 03:04:26.386531: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios-simulator -mios-version-min=13 -c /Users/gmane/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/include/dart_api_dl.c -fpic -gline-tables-only -I src -o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-08-09 03:04:26.389235: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios-simulator -mios-version-min=13 -c /Users/gmane/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/objective_c.c -fpic -gline-tables-only -I src -o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c.c.o
+
+INFO: 2026-08-09 03:04:26.389667: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios-simulator -mios-version-min=13 -x objective-c -fobjc-arc -c /Users/gmane/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/input_stream_adapter.m -fpic -gline-tables-only -I src -o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-08-09 03:04:26.390260: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios-simulator -mios-version-min=13 -x objective-c -fobjc-arc -c /Users/gmane/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/observer.m -fpic -gline-tables-only -I src -o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/observer.m.o
+
+.m.o
+
+INFO: 2026-08-09 03:04:26.390793: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios-simulator -mios-version-min=13 -x objective-c -fobjc-arc -c /Users/gmane/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/ns_number.m -fpic -gline-tables-only -I src -o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/ns_number.m.o
+
+INFO: 2026-08-09 03:04:26.391609: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios-simulator -mios-version-min=13 -x objective-c -fobjc-arc -c /Users/gmane/.pub-cache/hosted/pub.dev/objective_c-9.5.0/src/objective_c_bindings_generated.m -fpic -gline-tables-only -I src -o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-08-09 03:04:26.610073: 
+INFO: 2026-08-09 03:04:26.610376: 
+INFO: 2026-08-09 03:04:26.610494: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c.c.o
+
+INFO: 2026-08-09 03:04:26.612440: 
+INFO: 2026-08-09 03:04:26.612527: 
+INFO: 2026-08-09 03:04:26.612563: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-08-09 03:04:26.657920: 
+INFO: 2026-08-09 03:04:26.658006: 
+INFO: 2026-08-09 03:04:26.658042: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/observer.m.o
+
+INFO: 2026-08-09 03:04:26.658699: 
+INFO: 2026-08-09 03:04:26.658764: 
+INFO: 2026-08-09 03:04:26.658814: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/protocol.m.o
+
+INFO: 2026-08-09 03:04:26.923294: 
+INFO: 2026-08-09 03:04:26.923418: 
+INFO: 2026-08-09 03:04:26.923455: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c.m.o
+
+INFO: 2026-08-09 03:04:26.939673: 
+INFO: 2026-08-09 03:04:26.939793: 
+INFO: 2026-08-09 03:04:26.939829: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/ns_number.m.o
+
+INFO: 2026-08-09 03:04:26.956312: 
+INFO: 2026-08-09 03:04:26.956438: 
+INFO: 2026-08-09 03:04:26.956472: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-08-09 03:04:27.060904: 
+INFO: 2026-08-09 03:04:27.061022: 
+INFO: 2026-08-09 03:04:27.061056: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-08-09 03:04:27.061775: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -shared -Wl,-encryptable -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target x86_64-apple-ios-simulator -mios-version-min=13 /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/include/dart_api_dl.c.o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c.c.o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/input_stream_adapter.m.o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c.m.o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/observer.m.o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/ns_number.m.o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/protocol.m.o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/obj/src/objective_c_bindings_generated.m.o -o /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/objective_c.dylib
+
+INFO: 2026-08-09 03:04:27.148118: 
+INFO: 2026-08-09 03:04:27.148233: ld: warning: -undefined dynamic_lookup is deprecated on iOS-simulator
+
+INFO: 2026-08-09 03:04:27.148271: Generated /Users/gmane/Documents/ZoMae Media LLC/Project Concepts/abundance_deposits/.dart_tool/hooks_runner/shared/objective_c/build/6491424e80/objective_c.dylib
+

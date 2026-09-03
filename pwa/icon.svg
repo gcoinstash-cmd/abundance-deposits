@@ -1,0 +1,15 @@
+<svg width='512' height='512' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'>
+  <defs>
+    <linearGradient id='bgGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#1a2333'/>
+      <stop offset='100%' stop-color='#080c14'/>
+    </linearGradient>
+    <linearGradient id='goldGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#fae053'/>
+      <stop offset='100%' stop-color='#34d399'/>
+    </linearGradient>
+  </defs>
+  <rect width='512' height='512' rx='115' fill='url(#bgGrad)'/>
+  <rect x='16' y='16' width='480' height='480' rx='105' fill='none' stroke='url(#goldGrad)' stroke-width='6' stroke-opacity='0.6'/>
+  <text x='256' y='325' font-family='-apple-system, SF Pro Display, Helvetica, sans-serif' font-size='260' font-weight='bold' fill='url(#goldGrad)' text-anchor='middle'>$</text>
+</svg>
